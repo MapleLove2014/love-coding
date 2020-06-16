@@ -1,16 +1,9 @@
 numbers = {str(i) for i in range(0, 10, 1)}
 
 class Data:
-    def __init__(self, s, belong2Index = None):
+    def __init__(self, s):
         super().__init__()
         self.s = s
-        self.belong2Index = belong2Index
-    
-    def belongs(self):
-        return len(self.belong2Index) if self.belong2Index else 0
-
-    def addBelong(self, belong, index=None):
-        self.belong2Index[belong] = index
 
 class Node:
     def __init__(self, data, parent, childs = None):
@@ -42,7 +35,7 @@ class Node:
         return False
 
     def __str__(self, prefix=''):
-        s = prefix + self.data.s + ':' + str(self.data.belongs()) + ':' + str(self.data.belong2Index)
+        s = prefix + self.data.s
         for child in self.childs.values():
             s += '\n'
             s += child.__str__(prefix + '    ')
@@ -77,31 +70,6 @@ class SuffixTree:
             start += len(child.data.s)
             root = child
 
-    def findLongestPalindromicSubString(self):
-        return self.longestSubString(self.root, len(self.stringList))
-
-    def isPalindromicSubString(self, node, length):
-        if not node.data.belong2Index or not node.data.belong2Index[0] or not node.data.belong2Index[1]:
-            return True
-        reversedEndIndexInOriginal = len(self.stringList[1]) - 1 - node.data.belong2Index[1]
-        reversedStartIndexInOriginal = reversedEndIndexInOriginal - length + 1
-        return node.data.belong2Index[0] == reversedStartIndexInOriginal and node.data.belong2Index[0] + length - 1 == reversedEndIndexInOriginal
-
-    def longestSubString(self, node, belongs):
-        if not node.isRoot() and node.data.belongs() != belongs:
-            return ''
-
-        if len(node.childs) == 0:
-            return ''
-            
-        subString = ''
-        for child in node.childs.values():
-            s = node.data.s + self.longestSubString(child, belongs)
-            if s and len(s) > len(subString) and self.isPalindromicSubString(node, len(s)):
-                subString = s
-        return subString if not node.isRoot() else subString[4:]
-            
-
     def build(self):
         suffixes = self.generateSuffixes()
         for suffix  in suffixes:
@@ -114,7 +82,7 @@ class SuffixTree:
             return
         if not root.isRoot() and len(root.childs) == 1:
             child = list(root.childs.values())[0]
-            tempNode = Node(Data(root.data.s + child.data.s, root.data.belong2Index), root.parent, child.childs)
+            tempNode = Node(Data(root.data.s + child.data.s), root.parent, child.childs)
             root.parent.replaceChild(root.data.s[0], tempNode)
             self.compress(tempNode)
         else:
@@ -125,21 +93,19 @@ class SuffixTree:
         if start >= len(suffix.string):
             return
         string = suffix.string[start:]
-        index = suffix.index + start
         # base case : tail 
         if self.isTail(string):
-            root.addChild(suffix, Node(Data(string, {suffix.belong : index}), root))
+            root.addChild(suffix, Node(Data(string), root))
             return
         thisChar = string[0]
         next = self.findPath(root, thisChar)
         # no path starts with s[start]
         if not next:
-            startRoot = Node(Data(thisChar, {suffix.belong : index}), root)
+            startRoot = Node(Data(thisChar), root)
             root.addChild(thisChar, startRoot)
             self.buildSingleString(startRoot, suffix, start + 1)
             return
         # exist path starts wirht s[start]
-        next.data.addBelong(suffix.belong, index)
         self.buildSingleString(next, suffix, start + 1)
      
     def findPath(self, root, c):
@@ -175,6 +141,5 @@ class SuffixTree:
 #tree = SuffixTree(['bear', 'bell', 'bid', 'bull', 'buy', 'sell', 'stock', 'stop'])
 tree =SuffixTree(['abacdfgdcaba', 'abacdgfdcaba'])
 tree.build()
-print(tree.findLongestPalindromicSubString())
 
 
