@@ -49,11 +49,56 @@ class DPSolution:
         j -= 1
         return j - i + 1, [i, j]
 
+    def makeOdd(self, s):    
+        # avoid even length of palindromic string
+        return '#' + '#'.join(s) + '#'
 
+    def manacherAlgorithm(self, s):
+        if not s or len(s) == 0:
+            return ''
+        s = self.makeOdd(s)
+        start = 0
+        end = 0
 
+        c = 0
+        l = 0
+        r = 0
+        p = [0] * len(s)
+        for i in range(len(s)):
+            # case 1  cross over the previous parlindromicstring right index
+            if i > r:
+                c = i
+                l = i
+                r = i
+            # determine minimum expand length
+            mirror = 2 * c - i
+            if mirror - p[mirror] < l:
+                p[i] = r - i
+            else:
+                p[i] = p[mirror]
+
+            # expand based on expand length
+            while i - p[i] - 1 >= 0 and i + p[i] + 1 < len(s) and s[i - p[i] - 1] == s[i + p[i] + 1]:
+                p[i] += 1
+            
+            # determine new parlindromic string is beyond the current parlindromic string
+            if i - p[i] < l or i + p[i] > r:
+                c = i
+                l = i - p[i]
+                r = i + p[i]
+
+            # keep max palindromic string lenth in the loop
+            if r - l + 1 > end - start + 1:
+                start = l
+                end = r
+        
+        return s[start: end + 1].replace('#', '')
 
 
 d = DPSolution()
-print(d.centerAround('babd'))
-print(d.solution('babd'))
+#print(d.centerAround('babd'))
+#print(d.solution('cbbd'))
+print(d.manacherAlgorithm('abb'))
+
+
 
