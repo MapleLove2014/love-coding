@@ -1,4 +1,4 @@
-from Generator import Generator
+from Generator import randomNums
 from Validator import isSorted
 
 class SelectionSort():
@@ -22,11 +22,10 @@ class SelectionSort():
 
 
 s = SelectionSort()
-g = Generator()
-print(isSorted(s.sort(g.randomNums(20))))
-print(isSorted(s.sort(g.randomNums(20))))
-print(isSorted(s.sort(g.randomNums(20))))
-print(isSorted(s.sort(g.randomNums(20))))
-print(isSorted(s.sort(g.randomNums(20))))
-print(isSorted(s.sort(g.randomNums(20))))
+print(isSorted(s.sort(randomNums(20))))
+print(isSorted(s.sort(randomNums(20))))
+print(isSorted(s.sort(randomNums(20))))
+print(isSorted(s.sort(randomNums(20))))
+print(isSorted(s.sort(randomNums(20))))
+print(isSorted(s.sort(randomNums(20))))
 
