@@ -65,7 +65,7 @@ class DPSolution:
         r = 0
         p = [0] * len(s)
         for i in range(len(s)):
-            # case 1  cross over the previous parlindromicstring right index
+            # case 1  cross over the previous parlindromic string right index
             if i > r:
                 c = i
                 l = i
