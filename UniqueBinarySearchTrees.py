@@ -24,13 +24,13 @@ class Solution:
             rights = self.search((i+1, x), mem)
             if lefts <= 0 or rights <= 0:
                 continue
-            mem[n][i-1] = lefts
-            mem[i+1][x] = rights
             count += lefts * rights
+        mem[n][x] = count
         return count
 
 s = Solution()
 print(s.numTrees(5) == 42)
+print(s.numTrees(15))
 
 
 
