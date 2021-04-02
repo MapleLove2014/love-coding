@@ -7,6 +7,9 @@ class Solution:
             if k == 0:
                 results.append(subset)
                 return
+            # 增加剪枝
+            if len(numsLeft) < k:
+                return
             for i in range(k):
                 doSubset(numsLeft[i+1:], k - i - 1, subset | set(numsLeft[i:i+1]), results)
         results = []
