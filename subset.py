@@ -1,5 +1,22 @@
 class Solution:
+
     def subsets(self, nums):
+        def doSubsets(nums, i):
+            if len(nums) == i + 1:
+                return [[nums[i]]]
+            results = []
+            results.append([nums[i]])
+            subResults = doSubsets(nums, i+1)
+            results.extend(subResults)
+            for subResult in subResults:
+                results.append([nums[i]] + subResult)
+            return results
+
+        return doSubsets(nums, 0) + [[]]
+
+
+    # 逻辑有点错误
+    def subsets2(self, nums):
         if not nums or len(nums) == 0:
             return [[]]
 
@@ -20,3 +37,4 @@ class Solution:
 
 s = Solution()
 print(s.subsets([1,2,3]))
+print(s.subsets2([1,2,3]))
