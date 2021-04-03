@@ -1,5 +1,5 @@
 class Solution:
-
+    # 这个方法最快
     def subsets(self, nums):
         def doSubsets(nums, i):
             if len(nums) == i + 1:
@@ -13,6 +13,22 @@ class Solution:
             return results
 
         return doSubsets(nums, 0) + [[]]
+
+    # leetcode 大神的做法：https://leetcode.com/problems/subsets-ii/discuss/388566/
+    def subsets1(self, nums):
+        def doSubsets(nums, i, choosen, results):
+            if i == len(nums):
+                return
+            # pick current value
+            results.append(choosen + nums[i:i+1])
+            doSubsets(nums, i+1, results[-1], results)
+            # not pick current value
+            doSubsets(nums, i+1, choosen, results)
+        results = []
+        doSubsets(nums, 0, [], results)
+        results.append([])
+        return results
+
 
 
     # 逻辑有点错误
@@ -37,4 +53,5 @@ class Solution:
 
 s = Solution()
 print(s.subsets([1,2,3]))
+print(s.subsets1([1,2,3]))
 print(s.subsets2([1,2,3]))
