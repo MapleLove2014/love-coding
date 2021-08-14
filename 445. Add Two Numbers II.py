@@ -41,8 +41,42 @@ class Solution:
             newHead = node
             node = nodeNext
         return newHead
+
+
+    def solu2(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+        def listSum(list: Optional[ListNode]):
+            node = list
+            s = 0
+            while node:
+                s *= 10
+                s += node.val
+                node = node.next
+
+            return s
+        s = listSum(l1) + listSum(l2)
+        node = None
+
+        while s > 0:
+            newNode = ListNode(s % 10)
+            newNode.next = node
+            node = newNode
+            s = s // 10
+        
+        return node if node else ListNode(0)
+
+
+        
 s = Solution()
 r = s.addTwoNumbers(ListNode(7, ListNode(2, ListNode(4, ListNode(3)))), ListNode(5, ListNode(6, ListNode(4))))
 print(r)
 
 print(s.addTwoNumbers(ListNode(5), ListNode(5)))
+
+
+print(s.solu2(ListNode(7, ListNode(2, ListNode(4, ListNode(3)))), ListNode(5, ListNode(6, ListNode(4)))))
+print(s.solu2(ListNode(5), ListNode(5)))
