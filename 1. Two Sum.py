@@ -6,3 +6,16 @@ class Solution:
                     return [i, j]
         return []
         
+    def twoSum2(self, nums, target: int):
+        d = {}
+        for i in range(len(nums)):
+            left = target - nums[i]
+            if left in d:
+                return [i, d[left]]
+            d[nums[i]] = i
+
+
+        return []
+
+s = Solution()
+print(s.twoSum2([1,2,3], 5))
