@@ -9,5 +9,4 @@ class Solution:
         if not nums:
             return None
         mid = len(nums) // 2
-        root = TreeNode(nums[mid], self.sortedArrayToBST(nums[0:mid]), self.sortedArrayToBST(nums[mid + 1:]))
-        return root
+        return TreeNode(nums[mid], self.sortedArrayToBST(nums[0:mid]), self.sortedArrayToBST(nums[mid + 1:]))
