@@ -5,6 +5,28 @@ class ListNode:
         self.val = val
         self.next = next
 class Solution:
+
+    def mergeTwoLists2(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy=ListNode(0)
+        head=dummy
+        i=list1
+        j=list2
+        while i and j:
+            if i.val <= j.val:
+                head.next=i
+                head=head.next
+                i=i.next
+            else:
+                head.next=j
+                head=head.next
+                j=j.next
+        k=i if i else j
+        while k:
+            head.next=k
+            head=head.next
+            k=k.next
+        return dummy.next        
+
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         tail = None
         head = None
