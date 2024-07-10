@@ -33,3 +33,23 @@ class Solution:
                 return find(nums, mid+1, j, target)
         start, end = find(nums, 0, len(nums)-1, target)
         return [start, end]
+
+    def searchRange2(self, nums, target: int):
+        def search(nums, left, right, target):
+            while left <= right:
+                mid = int((left + right) / 2)
+                if nums[mid] == target:
+                    
+                    l=search(nums, left, mid - 1, target)
+                    r=search(nums, mid + 1, right, target)
+                    i=min(l[1], l[2]) if l[0] else mid
+                    j=max(r[1], r[2]) if r[0] else mid
+                    return [True, i, j]
+
+                elif target < nums[mid]:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            return [False, -1, -1]
+            
+        return search(nums, 0, len(nums) - 1, target)[1:]
