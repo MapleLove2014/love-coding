@@ -33,8 +33,24 @@ class Solution:
                 dedupResults.append(result)
                 dedup.add(rs)
         return dedupResults
+    def combinationSum22(self, candidates: List[int], target: int) -> List[List[int]]:
+        def comb(candidates, target, index, trace, result):
+            if target == 0:
+                result.append(trace)
+                return
+            if index == len(candidates):
+                return
+            
+            for i in range(index, len(candidates)):
+                if i > index and candidates[i] == candidates[i-1]:
+                    continue
+                if candidates[i] > target:
+                    break
+                comb(candidates, target - candidates[i], i + 1, trace + [candidates[i]] , result)
 
-
+        result = []
+        comb(sorted(candidates), target, 0, [], result)
+        return result
 
 s = Solution()
 print(s.combinationSum2([10,1,2,7,6,1,5], 8))
