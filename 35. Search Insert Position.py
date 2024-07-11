@@ -21,7 +21,6 @@ class Solution:
     def searchInsert2(self, nums: List[int], target: int) -> int:
         left = 0
         right = len(nums) - 1
-        less = left
         while left <= right:
             mid = (left + right) // 2
             if nums[mid] == target:
@@ -29,6 +28,5 @@ class Solution:
             if nums[mid] > target:
                 right = mid - 1
             else:
-                less = mid
                 left = mid + 1
-        return less
+        return left
