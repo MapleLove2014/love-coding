@@ -62,3 +62,20 @@ class Solution:
             i = i + dirh[di]
             j = j + dirv[di]
         return result
+    
+    def spiralOrder2(self, matrix: List[List[int]]) -> List[int]:
+        x=0
+        y=0
+        d=[[0,1], [1,0], [0, -1], [-1,0]]
+        di=0
+        result = []
+        for _ in range(len(matrix) * len(matrix[0])):
+            result.append(matrix[x][y])
+            matrix[x][y] = True
+            if x + d[di][0] < 0 or y + d[di][1] < 0 or x+d[di][0] == len(matrix) or y+d[di][1] == len(matrix[0]) or matrix[x+d[di][0]][y+d[di][1]] == True:
+                # change direction
+                di += 1
+                di = di % 4
+            x = x + d[di][0]
+            y = y + d[di][1]
+        return result
