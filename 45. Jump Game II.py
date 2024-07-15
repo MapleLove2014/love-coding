@@ -15,7 +15,6 @@ class Solution:
         dp = [len(nums)] * len(nums)
         dp[0] = 0
         for i in range(1, len(nums)):
-            m = dp[i]
             for j in range(i-1, -1, -1):
                 if dp[j] >= 0 and nums[j] >= i - j:
                     dp[i] = min(dp[i], dp[j] + 1)
