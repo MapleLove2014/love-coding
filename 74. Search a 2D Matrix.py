@@ -28,6 +28,29 @@ class Solution:
         return r >= 0 and findInRow(matrix[r], 0, len(matrix[r])-1, target)
 
 
+    def searchMatrix2(self, matrix, target: int) -> bool:
+        startr = 0
+        endr = len(matrix) - 1
+        while startr <= endr:
+            midr = (startr + endr) // 2
+            if target < matrix[midr][0]:
+                endr = midr - 1
+            elif target > matrix[midr][-1]:
+                startr = midr + 1
+            else:
+                startc=0
+                endc=len(matrix[0]) -1
+                while startc <= endc:
+                    mid = (startc + endc) // 2
+                    if matrix[midr][mid] > target:
+                        endc = mid - 1
+                    elif matrix[midr][mid] < target:
+                        startc = mid + 1
+                    else:
+                        return True
+                return False
+        return False
+
 s = Solution()
 print(s.searchMatrix([[1]], 0))
 print(s.searchMatrix([[1,3,5,7],[10,11,16,20],[23,30,34,60]], 3))
