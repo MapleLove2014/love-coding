@@ -20,8 +20,22 @@ class Solution:
                     # dp[i-1][j-1] + 1: word1[0...i-2] -> word2[0...j-2], replace character at position i-1 in word1
                     dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
         return dp[-1][-1]
-                
 
+    # timeout   
+    def minDistance2(self, word1: str, word2: str) -> int:
+        if not word1:
+            return len(word2)
+        if not word2:
+            return len(word1)
+        if word1 == word2:
+            return 0
+        return min(
+        # insert character word2[-1] at word1
+        self.minDistance2(word1, word2[:-1] )+1,
+        # replace character
+        self.minDistance2(word1[:-1], word2[:-1]) + (0 if word1[-1] == word2[-1] else 1),
+        # delete character
+        self.minDistance2(word1[:-1], word2)+1)
 
             
 
