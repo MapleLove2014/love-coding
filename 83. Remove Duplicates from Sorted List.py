@@ -17,3 +17,14 @@ class Solution:
                 previous = node
             node = next
         return dummy
+    def deleteDuplicates2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        d=ListNode(-2**31, head)
+        last=d
+        node=head
+        while node:
+            if node.val != last.val:
+                last.next = node
+                last= last.next
+            node = node.next
+        last.next = None
+        return d.next
