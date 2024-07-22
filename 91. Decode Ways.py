@@ -14,6 +14,24 @@ class Solution:
                 result[i] = result[i+1]
         return result[0]     
 
+    def numDecodings2(self, s: str) -> int:
+        if not s:
+            return 0
+        dp = [0] * len(s)
+        if s[0] == "0":
+            return 0
+        dp[0] = 1
+
+        for i in range(1, len(s)):
+            if s[i] != "0":
+                dp[i] += dp[i-1]
+            if s[i-1] != "0" and int(s[i-1:i+1]) <= 26:
+                if i == 1:
+                    dp[i] += 1
+                else:
+                    dp[i] += dp[i-2]
+        return dp[-1]
+
 s = Solution()
 print(s.numDecodings('226') == 3)
 print(s.numDecodings('12') == 2)
