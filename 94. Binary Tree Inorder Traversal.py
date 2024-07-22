@@ -34,3 +34,10 @@ class Solution:
             node = stack.pop()
             result.append(node.val)
             node = node.right
+
+    def inorderTraversal2(self, root):
+        def t(root):
+            if not root:
+                return []
+            return t(root.left) + [root.val] + t(root.right)
+        return t(root)
