@@ -38,5 +38,22 @@ class Solution:
 
 
 
+    def isValidBST2(self, root) -> bool:
+        stack = []
+        prev=None
+        while True:
+
+            while root:
+                stack.append(root)
+                root = root.left
+            if len(stack) == 0:
+                return True
+            l = stack.pop()
+            if prev != None and l.val <= prev:
+                return False
+            prev = l.val
+            root = l.right
+
+
 
 
