@@ -19,4 +19,16 @@ class Solution:
                 root.right = doBuild(preorder[rootIndex + 1 : ], inorder[rootIndex + 1 : ])
             return root
         return doBuild(preorder, inorder)
+
+    def buildTree2(self, preorder, inorder):
+        
+        def build(preIndex, inStart, inEnd, preorder, inorder):
+            if inStart > inEnd:
+                return None
+            node=TreeNode(preorder[preIndex])
+            i=inorder.index(node.val)
+            node.left = build(preIndex + 1, inStart, i-1, preorder, inorder)
+            node.right = build(preIndex + 1 + (i - inStart), i + 1, inEnd, preorder, inorder)
+            return node
+        return build(0, 0, len(inorder)-1, preorder, inorder)
         
