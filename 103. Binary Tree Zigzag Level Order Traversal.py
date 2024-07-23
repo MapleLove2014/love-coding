@@ -23,3 +23,20 @@ class Solution:
                     thisQueue.append(node.right)
             queue = thisQueue
         return result
+    def zigzagLevelOrder(self, root):
+        queue = [root]
+        result = []
+        d=True
+        while queue:
+            l = []
+            nq=[]
+            for n in queue :
+                if n:
+                    l.append(n.val)
+                    nq.append(n.left)
+                    nq.append(n.right)
+            queue = nq
+            if l:
+                result.append(l if d else l[::-1])
+            d = not d
+        return result
