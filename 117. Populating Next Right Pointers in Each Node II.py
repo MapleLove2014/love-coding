@@ -39,10 +39,7 @@ class Solution:
 
         if not root:
             return root
-        
-
         stack = [root]
-
         while len(stack) > 0:
             preNode = None
             node = None
@@ -57,6 +54,20 @@ class Solution:
                 if node.right:
                     newStack.append(node.right)
             stack = newStack
+        return root
+    def connect2(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        queue = [root]
+        while queue:
+            nq = []
+            n = Node()
+            for q in queue:
+                if q:
+                    q.next = None
+                    n.next = q
+                    n = q
+                    nq.append(q.left)
+                    nq.append(q.right)
+            queue = nq
         return root
             
 
