@@ -19,3 +19,12 @@ class Solution:
             doFind(root.right, targetSum - root.val, prefix + [root.val], result)
         doFind(root, targetSum, [], result)
         return result
+    
+    def pathSum2(self, root: TreeNode, targetSum: int) -> List[List[int]]:
+        def p(root, targetSum, prefix):
+            if not root:
+                return []
+            if targetSum == root.val and not root.left and not root.right:
+                return [prefix + [root.val]]
+            return p(root.left, targetSum-root.val, prefix + [root.val]) + p(root.right, targetSum-root.val, prefix + [root.val])
+        return p(root, targetSum, [])
