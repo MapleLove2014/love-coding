@@ -13,4 +13,12 @@ class Solution:
                 row[j] = left + right
             result.append(row)
         return result[-1]
+    def getRow2(self, rowIndex: int):
+        r = []
+        for i in range(rowIndex+1):
+            rr = [1]*(i+1)
+            for x in range(1, i):
+                rr[x]=r[x-1] + r[x]
+            r = rr
+        return rr
 
