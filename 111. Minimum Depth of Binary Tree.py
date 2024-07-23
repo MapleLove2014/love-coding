@@ -19,6 +19,12 @@ class Solution:
         
             return min(search(root.left, 1 + d), search(root.right, 1 + d))
         return search(root, 0)
+    def minDepth2(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        if not root.left and not root.right:
+            return 1
+        return 1  + min([ self.minDepth(node) if node else 2**31 for node in [root.left, root.right]])
 
 
 
