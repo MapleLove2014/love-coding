@@ -24,7 +24,7 @@ class Solution:
             return 0
         if not root.left and not root.right:
             return 1
-        return 1  + min([ self.minDepth(node) if node else 2**31 for node in [root.left, root.right]])
+        return 1  + min([ self.minDepth2(node) if node else 2**31 for node in [root.left, root.right]])
 
 
 

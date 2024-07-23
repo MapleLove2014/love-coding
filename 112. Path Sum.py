@@ -19,3 +19,10 @@ class Solution:
         if root.right:
             return self.hasPathSum(root.right, targetSum - root.val)
         return False
+    def hasPathSum2(self, root, targetSum: int) -> bool:
+        if not root or targetSum == 0:
+            return False
+        if targetSum == root.val and not root.left and not root.right:
+            return True
+        return self.hasPathSum2(root.left, targetSum - root.val) or self.hasPathSum2(root.right, targetSum - root.val)
+            
