@@ -10,3 +10,8 @@ class Solution:
             return None
         mid = len(nums) // 2
         return TreeNode(nums[mid], self.sortedArrayToBST(nums[0:mid]), self.sortedArrayToBST(nums[mid + 1:]))
+    def sortedArrayToBST2(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None
+        return TreeNode(nums[len(nums)//2], self.sortedArrayToBST(nums[0:len(nums)//2]), self.sortedArrayToBST(nums[len(nums)//2 + 1:]))
+        
