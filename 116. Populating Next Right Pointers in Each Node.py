@@ -32,3 +32,17 @@ class Solution:
         connectLeft(root.left, root, True)
         connectRight(root.right, root)
         return root
+    def connect2(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        queue = [root]
+        while queue:
+            nq = []
+            n = Node()
+            for q in queue:
+                if q:
+                    q.next = None
+                    n.next = q
+                    n = q
+                    nq.append(q.left)
+                    nq.append(q.right)
+            queue = nq
+        return root
