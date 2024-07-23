@@ -21,5 +21,21 @@ class Solution:
                     newQueue.append(node.right)
             queue = newQueue
         return reversed(result)
+    
+    def levelOrderBottom2(self, root):
+        queue=[root]
+        result = []
+        while queue:
+            nq = []
+            l=[]
+            for q in queue:
+                if q:
+                    l.append(q.val)
+                    nq.append(q.left)
+                    nq.append(q.right)
+            if l:
+                result.append(l)
+            queue = nq
+        return result[::-1]
 
 
