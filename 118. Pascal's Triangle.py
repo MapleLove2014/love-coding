@@ -14,6 +14,14 @@ class Solution:
                 row[j] = left + right
             result.append(row)
         return result
+    def generate2(self, numRows: int):
+        r = [[0]*numRows]
+        for i in range(numRows):
+            rr = [1]*(i+1)
+            for x in range(1, i):
+                rr[x]=r[-1][x-1] + r[-1][x]
+            r.append(rr)
+        return r[1:]
 
 
 
