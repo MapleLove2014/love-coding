@@ -10,7 +10,6 @@ class Solution:
             return []
         result = []
         queue = [root]
-        node = None
         while len(queue) > 0:
             result.append([node.val for node in queue])
             newQueue = []
@@ -23,4 +22,18 @@ class Solution:
 
         return result
                 
-            
+    def levelOrder2(self, root):
+        stack = [root]
+        result = []
+        while stack:
+            news = []
+            l = []
+            for e in stack:
+                if e:
+                    l.append(e.val)
+                    news.append(e.left)
+                    news.append(e.right)
+            if l:
+                result.append(l)
+            stack=news
+        return result
