@@ -32,3 +32,22 @@ class Solution:
             node = node.next
             tortoise = tortoise.next
         return node
+    def detectCycle2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        d = ListNode(0, head)
+        t = d
+        h=d
+        while True:
+            for _ in range(2):
+                if not h.next:
+                    return None
+                h = h.next
+            if not t.next:
+                return None
+            t = t.next
+            if h == t:
+                break
+        h = d
+        while h != t:
+            h = h.next
+            t = t.next
+        return h
