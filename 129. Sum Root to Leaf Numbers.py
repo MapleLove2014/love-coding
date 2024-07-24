@@ -20,4 +20,17 @@ class Solution:
             return result
         
         return doit(root, '')
+    def sumNumbers2(self, root) -> int:
+        def s(root, n):
+            if not root:
+                return []
+            if not root.left and not root.right:
+                return [n + str(root.val)]
+            r = []
+            if root.left:
+                r += s(root.left, n + str(root.val))
+            if root.right:
+                r += s(root.right, n + str(root.val))
+            return r
+        return sum([int(n) for n in s(root, "")])
 
