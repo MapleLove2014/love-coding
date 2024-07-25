@@ -16,3 +16,19 @@ class Solution:
             return find(nums, i, mid - 1)
             
         return find(nums, 0, len(nums)-1)
+    def findMin2(self, nums: list[int]) -> int:
+        l = 0
+        h = len(nums) - 1
+        m = 2**31
+        while l <= h:
+            mid = (l + h) // 2
+            m = min(m, nums[mid])
+            if nums[mid] >= nums[l]:
+                # l -- mid ordered
+                m = min(m, nums[l])
+                l = mid + 1
+            elif nums[mid] <= nums[h]:
+                # mid -- h ordered
+                m = min(m, nums[mid])
+                h = mid - 1
+        return m
