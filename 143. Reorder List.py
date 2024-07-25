@@ -51,6 +51,45 @@ class Solution:
         left.next = None
         print(head)
 
+    def reorderList2(self, head) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        d = ListNode(0, head)
+        node = d.next
+        l = 0
+        while node:
+            l += 1
+            node = node.next
+        
+        skip = l // 2 + (l % 2)
+        node = d.next
+        while skip > 0:
+            skip -= 1
+            if skip == 0:
+                nn = node.next
+                node.next = None
+                node = nn
+            else:
+                node = node.next
+        rh = None
+        while node:
+            n = node.next 
+            node.next = rh
+            rh = node
+            node = n
+        ops = l // 2
+        node = d.next
+        while node and rh and ops > 0:
+            n = node.next
+            node.next = rh
+            rn = rh.next
+            rh.next = n
+            rh = rn
+            node = n
+            ops -= 1
+        return d.next
+
 s = Solution()
 s.reorderList(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))))
 s.reorderList(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))))
