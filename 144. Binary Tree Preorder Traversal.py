@@ -38,3 +38,16 @@ class Solution:
         return result
         
 
+    def preorderTraversal2(self, root):
+        stack = []
+        r = []
+        while True:
+            while root:
+                r.append(root.val)
+                stack.append(root)
+                root = root.left
+            if not stack:
+                return r
+            e = stack.pop()
+            if e:
+                root = e.right
