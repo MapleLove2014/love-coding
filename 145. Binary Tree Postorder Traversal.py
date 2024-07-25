@@ -15,5 +15,11 @@ class Solution:
         result = []
         post(root, result)
         return result
+    def postorderTraversal2(self, root):
+        def p(root):
+            if not root:
+                return []
+            return p(root.left) + p(root.right) + [root.val]
+        return p(root)
 
 
