@@ -31,4 +31,22 @@ class Solution:
             node = nodeNext
         return dummy.next
 
+    def insertionSortList2(self, head):
+        d = ListNode(-2**31, None)
+        p = head
+        lastP = None
+        while p:
+            node = d if not lastP or lastP.val >= p.val else lastP # do not need to check from head each time
+            while node and node.val < p.val:
+                if not node.next or node.next.val >= p.val:
+                    break
+                node = node.next
+            nn = node.next
+            node.next = p
+            pn = p.next
+            p.next = nn
+            lastP = p
+            p = pn
+        return d.next
+
 
