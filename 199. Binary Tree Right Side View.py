@@ -21,3 +21,17 @@ class Solution:
                     newQueue.append(node.right)
             queue = newQueue
         return result
+
+    def rightSideView2(self, root):
+        stack = [root]
+        t = []
+        while stack:
+            n = []
+            t.append(None)
+            for node in stack:
+                if node:
+                    t[-1] = node.val
+                    n.append(node.left)
+                    n.append(node.right)
+            stack = n
+        return t if t[-1] != None else t[:-1]
