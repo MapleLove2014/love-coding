@@ -24,3 +24,14 @@ class Solution:
             return p
         return reverse(head)
     
+    def reverseList3(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        d = ListNode(0, None)
+        n = head
+        while n:
+            newHead = d.next
+            nn = n.next
+            n.next = newHead
+            d.next = n
+            n = nn
+        return d.next
+    
