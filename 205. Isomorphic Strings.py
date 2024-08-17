@@ -20,6 +20,17 @@ class Solution:
                 d[sc] = tc
                 dr[tc] = sc
         return True
+    def isIsomorphic2(self, s: str, t: str) -> bool:
+        def check(s, t):
+            d = {}
+            for i in range(len(s)):
+                c1 = s[i]
+                c2 = t[i]
+                if c1 in d and d[c1] != c2:
+                    return False
+                d[c1] = c2
+            return True
+        return check(s, t) and check(t, s)
 
 s = Solution()
 print(s.isIsomorphic('title', 'paper'))               
