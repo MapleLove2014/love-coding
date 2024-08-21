@@ -14,11 +14,9 @@ class Solution:
                         break
                 if can:
                     dp[i]=j
-                    subd=solve(dp, i + 1, n)
+                    result += solve(dp, i + 1, n)
                     dp[i]=-1
-                    if len(subd) > 0 and subd[-1] != -1:
-                        for subb in subd:
-                            result.append(subb)
+
             return result
         d=solve([-1]*n, 0, n)
         x=[]
