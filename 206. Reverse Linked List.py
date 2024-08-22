@@ -34,4 +34,13 @@ class Solution:
             d.next = n
             n = nn
         return d.next
+
+    def reverseList4(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        newHead = None
+        while head:
+            hn = head.next
+            head.next = newHead
+            newHead = head
+            head = hn
+        return newHead
     
