@@ -4,6 +4,10 @@ class Solution:
         
         if ay1 >= by2 or by1 >= ay2 or ax1 >= bx2 or ax2 <= bx1:
             return base
+        
+        # overflap width  (min(ax2, bx2) - max(ax1, bx1))
+        # overflap height (min(ay2, by2) - max(ay1, by1))
+
         return base - (min(ax2, bx2) - max(ax1, bx1)) * (min(ay2, by2) - max(ay1, by1))
         
     
