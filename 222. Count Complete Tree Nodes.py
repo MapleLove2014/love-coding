@@ -37,6 +37,23 @@ class Solution:
         if left == right:
             return 2 ** (left+1) - 1
         return self.ologn(root.left) + self.ologn(root.right) + 1
+    
+    def countNodes2(self, root) -> int:
+        if not root:
+            return 0
+        c = root
+        lh = 0
+        while c:
+            lh += 1
+            c = c.left
+        c = root
+        rh = 0
+        while c:
+            rh += 1
+            c = c.right
+        if lh == rh:
+            return 2 ** lh - 1
+        return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 
 
         
