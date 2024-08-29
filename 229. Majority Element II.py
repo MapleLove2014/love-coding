@@ -53,3 +53,47 @@ class Solution:
         if twoCount > len(nums)//3:
             result.append(two)
         return result
+    
+    def majorityElement3(self, nums):
+        
+        the = len(nums)//3
+        can1 = None
+        can2 = None
+        c1 = 0
+        c2 = 0
+
+        for n in nums:
+            if c1 == 0 and n != can2:
+                can1 = n
+                c1 = 1
+            elif c2 == 0 and n != can1:
+                can2 = n
+                c2 = 1
+            elif c1 != 0 and n == can1:
+                c1 += 1
+            elif c2 != 0 and n == can2:
+                c2 += 1
+            else:
+                c1 -= 1
+                c2 -= 1
+            if c1 == 0:
+                can1 = None
+            if c2 == 0:
+                can2 = None
+
+        c1 = 0
+        c2 = 0
+        for n in nums:
+            if n == can1:
+                c1 += 1
+            if n == can2:
+                c2 += 1
+        
+
+        ans = []
+        if c1 > the:
+            ans.append(can1)
+        if c2 > the and can1 != can2:
+            ans.append(can2)
+        return ans
+
