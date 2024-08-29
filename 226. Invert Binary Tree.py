@@ -17,3 +17,9 @@ class Solution:
         root.left = self.invertTree(right)
         root.right = self.invertTree(left)
         return root
+    
+    def invertTree2(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return None
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        return root
