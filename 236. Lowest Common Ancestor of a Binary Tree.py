@@ -6,7 +6,7 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor1(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         if not root:
             return None
         def path(root, node, result):
@@ -29,6 +29,43 @@ class Solution:
                 return pre
             pre = ppath[i]
         return pre
+
+    def lowestCommonAncestor2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        def road(root, node, prefix):
+            if not root:
+                return []
+            if root == node:
+                return prefix + [root]
+            l = road(root.left, node, prefix + [root])
+            if l:
+                return l
+            r = road(root.right, node, prefix + [root])
+            if r:
+                return r
+        t1 = road(root, p, [])
+        t2 = road(root, q, [])
+        l = root
+        for i in range(min(len(t1), len(t2))):
+            if t1[i] != t2[i]:
+                return l
+            l = t1[i]
+        return l
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return None
+        if root == p:
+            return p
+        if root == q:
+            return q
+        l = self.lowestCommonAncestor(root.left, p, q)
+        r = self.lowestCommonAncestor(root.right, p, q)
+        if not l and r:
+            return r
+        if l and not r:
+            return l
+        if l and r:
+            return root
+        return None
 
 s = Solution()
 
