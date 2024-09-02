@@ -9,5 +9,13 @@ class Solution:
                 inner = inner // 10
             num = s
         return num
+    def addDigits2(self, num: int) -> int:
+        while num >= 10:
+            n = 0
+            while num > 0:
+                n += (num % 10)
+                num = num // 10
+            num = n
+        return num
 
 
